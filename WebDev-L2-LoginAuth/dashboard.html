@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | SecureAuth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Hide the page until we've checked the user is logged in -->
+  <style>body { visibility: hidden; }</style>
+</head>
+<body class="dash-body">
+  <header class="topbar">
+    <div class="logo dark">🔒 SecureAuth</div>
+    <button class="btn-logout" id="logoutBtn">Log out</button>
+  </header>
+
+  <main class="dashboard">
+    <section class="welcome">
+      <p class="badge">Protected page</p>
+      <h1>Hello, <span id="userName"></span> 👋</h1>
+      <p class="sub">You can only see this page because you are logged in. Try opening it after logging out — you'll be sent back to the login page.</p>
+    </section>
+
+    <section class="stats">
+      <div class="stat">
+        <span class="stat-label">Logged in at</span>
+        <span class="stat-value" id="loginAt"></span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Account created</span>
+        <span class="stat-value" id="createdAt"></span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Registered users</span>
+        <span class="stat-value" id="userCount"></span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>How your password is stored</h2>
+      <p>Your password is mixed with a random salt and turned into a SHA-256 hash. Only this hash is saved — the real password is never stored anywhere.</p>
+      <div class="hash-row">
+        <span class="hash-label">Salt</span>
+        <code id="saltValue"></code>
+      </div>
+      <div class="hash-row">
+        <span class="hash-label">SHA-256 hash</span>
+        <code id="hashValue"></code>
+      </div>
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+  <script>
+    // Protect the page: no session -> back to login
+    const session = getSession();
+    if (!session) {
+      window.location.replace("index.html");
+    } else {
+      const user = findUser(session.username);
+      const fmt = (t) =>
+        new Date(t).toLocaleString(undefined, { day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit" });
+
+      document.getElementById("userName").textContent = user.username;
+      document.getElementById("loginAt").textContent = fmt(session.loginAt);
+      document.getElementById("createdAt").textContent = fmt(user.createdAt);
+      document.getElementById("userCount").textContent = getUsers().length;
+      document.getElementById("saltValue").textContent = user.salt;
+      document.getElementById("hashValue").textContent = user.passwordHash;
+
+      document.body.style.visibility = "visible";
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", logout);
+
+    // If the user logs out in another tab, leave this page too
+    window.addEventListener("storage", (e) => {
+      if (e.key === SESSION_KEY && !getSession()) window.location.replace("index.html");
+    });
+
+    // Coming back with the browser "Back" button after logout should not show the page
+    window.addEventListener("pageshow", () => {
+      if (!getSession()) window.location.replace("index.html");
+    });
+  </script>
+</body>
+</html>

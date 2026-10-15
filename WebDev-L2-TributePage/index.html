@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. A.P.J. Abdul Kalam — A Tribute</title>
+  <meta name="description" content="A tribute page to Dr. A.P.J. Abdul Kalam, the Missile Man of India and the People's President.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,500&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Simple top navigation -->
+  <nav class="nav">
+    <span class="nav-logo">APJ</span>
+    <ul class="nav-links">
+      <li><a href="#life">Life</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#quote">Words</a></li>
+    </ul>
+  </nav>
+
+  <!-- 1. Title + tagline + main image -->
+  <header class="hero" id="main">
+    <div class="hero-text">
+      <p class="eyebrow">A Tribute</p>
+      <h1 id="title">Dr. A.P.J. Abdul Kalam</h1>
+      <p class="tagline" id="tagline">The boy from Rameswaram who taught a nation to dream with its eyes open.</p>
+      <p class="dates">15 October 1931 — 27 July 2015</p>
+    </div>
+
+    <figure class="hero-figure" id="img-div">
+      <!--
+        Image: official portrait of Dr. Kalam, downloaded from Wikimedia Commons
+        (public domain / Government of India work). Saved locally as images/kalam.jpg
+      -->
+      <img id="image" src="images/kalam.jpg"
+           alt="Portrait of Dr. A.P.J. Abdul Kalam, 11th President of India">
+      <figcaption id="img-caption">
+        Official portrait as the 11th President of India.
+        <span class="credit">Image: Wikimedia Commons (public domain)</span>
+      </figcaption>
+    </figure>
+  </header>
+
+  <!-- 2. Biography / tribute — original writing -->
+  <main>
+    <section class="bio" id="life">
+      <div class="container">
+        <h2>A Life of Purpose</h2>
+
+        <p>
+          Avul Pakir Jainulabdeen Abdul Kalam was born in Rameswaram, a small island town in
+          Tamil Nadu, into a family that had very little money but plenty of values. As a young
+          boy he sold newspapers before school to help at home, and he spent his evenings
+          watching birds fly over the sea, wondering how they stayed in the air. That simple
+          curiosity about flight stayed with him for the rest of his life.
+        </p>
+
+        <p>
+          He studied physics and then aerospace engineering at the Madras Institute of
+          Technology. After graduating, he began work as a scientist in the defence research
+          system and later moved to the Indian Space Research Organisation. There he led the
+          team that built SLV-3, India's first home-made satellite launch vehicle, which put
+          the Rohini satellite into orbit in 1980. It was the moment India joined the small
+          group of nations that could reach space on their own.
+        </p>
+
+        <p>
+          Back in defence research, he headed the Integrated Guided Missile Development
+          Programme, which produced missiles such as Agni and Prithvi and earned him the
+          name "Missile Man of India". In 1998 he played a central role in the Pokhran-II
+          nuclear tests. Throughout this work he was known for giving credit to his team,
+          taking the blame himself when things went wrong, and treating every junior engineer
+          as a future leader.
+        </p>
+
+        <p>
+          In 2002 he became the 11th President of India. People called him the "People's
+          President" because he opened the doors of Rashtrapati Bhavan to ordinary citizens,
+          answered thousands of emails from students, and travelled across the country to
+          speak in schools and colleges. Even after his term ended he never stopped teaching.
+          He passed away on 27 July 2015 while giving a lecture to students in Shillong,
+          doing exactly what he loved most.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Timeline of key achievements (styled cards on a dark background) -->
+    <section class="timeline-section" id="timeline">
+      <div class="container">
+        <h2>Key Moments</h2>
+        <ol class="timeline">
+          <li class="timeline-item">
+            <span class="year">1931</span>
+            <p>Born on 15 October in Rameswaram, Tamil Nadu.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="year">1960</span>
+            <p>Graduates in aerospace engineering and joins defence research (DRDO) as a scientist.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="year">1969</span>
+            <p>Moves to ISRO and becomes project director of India's first satellite launch vehicle.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="year">1980</span>
+            <p>SLV-3 places the Rohini satellite in orbit — India reaches space on its own.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="year">1981</span>
+            <p>Awarded the Padma Bhushan; the Padma Vibhushan follows in 1990.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="year">1997</span>
+            <p>Receives the Bharat Ratna, India's highest civilian honour.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="year">1998</span>
+            <p>Plays a key role in the Pokhran-II nuclear tests.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="year">1999</span>
+            <p>Publishes his autobiography <em>Wings of Fire</em>, co-written with Arun Tiwari.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="year">2002</span>
+            <p>Sworn in as the 11th President of India, serving until 2007.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="year">2015</span>
+            <p>Passes away on 27 July while lecturing to students at IIM Shillong.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4. Quote block -->
+    <section class="quote-section" id="quote">
+      <div class="container">
+        <blockquote class="quote">
+          <p>"Dream, dream, dream. Dreams transform into thoughts and thoughts result in action."</p>
+          <cite>— Dr. A.P.J. Abdul Kalam</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Closing note -->
+    <section class="closing">
+      <div class="container">
+        <p>
+          Want to learn more about his life? Read about him on
+          <a id="tribute-link" href="https://en.wikipedia.org/wiki/A._P._J._Abdul_Kalam" target="_blank" rel="noopener">Wikipedia</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Made with respect by Aman Kapuria · Oasis Infobyte Web Development Internship</p>
+  </footer>
+
+  <script>
+    // Load the photo. If images/kalam.jpg isn't found, also try other common
+    // image types. If none work, show a clear note instead of a broken image.
+    (function () {
+      const img = document.getElementById("image");
+      const tries = ["images/kalam.jpeg", "images/kalam.png", "images/kalam.webp", "images/kalam.JPG"];
+
+      function tryNext() {
+        const next = tries.shift();
+        if (next) img.src = next;
+        else img.closest("figure").classList.add("no-image");
+      }
+
+      img.addEventListener("error", tryNext);
+      // The first try may have failed before this script ran
+      if (img.complete && img.naturalWidth === 0) tryNext();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | SecureAuth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="auth-wrap">
+    <aside class="brand-panel">
+      <div class="logo">🔒 SecureAuth</div>
+      <h2>Create your account.</h2>
+      <p>Pick a username, add your email and choose a strong password. It takes less than a minute.</p>
+    </aside>
+
+    <main class="form-panel">
+      <h1>Register</h1>
+      <p class="sub">Already have an account? <a href="index.html">Log in</a></p>
+
+      <div class="alert" id="alert" role="alert" hidden></div>
+
+      <form id="registerForm" novalidate>
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" autocomplete="username" placeholder="3–20 letters, numbers, _ or .">
+          <span class="field-error"></span>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" autocomplete="email" placeholder="you@example.com">
+          <span class="field-error"></span>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="pass-wrap">
+            <input type="password" id="password" autocomplete="new-password" placeholder="Create a password">
+            <button type="button" class="toggle-pass">Show</button>
+          </div>
+          <ul class="rules" id="rules">
+            <li data-rule="length">At least 8 characters</li>
+            <li data-rule="number">At least 1 number</li>
+          </ul>
+          <span class="field-error"></span>
+        </div>
+
+        <div class="field">
+          <label for="confirm">Confirm password</label>
+          <div class="pass-wrap">
+            <input type="password" id="confirm" autocomplete="new-password" placeholder="Type it again">
+            <button type="button" class="toggle-pass">Show</button>
+          </div>
+          <span class="field-error"></span>
+        </div>
+
+        <button type="submit" class="btn-primary" id="registerBtn">Register</button>
+      </form>
+    </main>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    if (getSession()) window.location.replace("dashboard.html");
+
+    const form = document.getElementById("registerForm");
+    const usernameInput = document.getElementById("username");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const confirmInput = document.getElementById("confirm");
+    const alertBox = document.getElementById("alert");
+    const registerBtn = document.getElementById("registerBtn");
+    const ruleItems = document.querySelectorAll("#rules li");
+
+    // Live password rule checklist
+    passwordInput.addEventListener("input", () => {
+      const result = checkPasswordRules(passwordInput.value);
+      ruleItems.forEach((li) => li.classList.toggle("met", result[li.dataset.rule]));
+    });
+
+    [usernameInput, emailInput, passwordInput, confirmInput].forEach((input) =>
+      input.addEventListener("input", () => setFieldError(input, ""))
+    );
+
+    function validate() {
+      const username = usernameInput.value.trim();
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      const confirm = confirmInput.value;
+      let valid = true;
+
+      const fail = (input, msg) => {
+        setFieldError(input, msg);
+        valid = false;
+      };
+
+      if (!username) fail(usernameInput, "Please choose a username.");
+      else if (!USERNAME_PATTERN.test(username))
+        fail(usernameInput, "Use 3–20 letters, numbers, _ or . only.");
+
+      if (!email) fail(emailInput, "Please enter your email.");
+      else if (!EMAIL_PATTERN.test(email)) fail(emailInput, "Please enter a valid email address.");
+
+      const rules = checkPasswordRules(password);
+      if (!password) fail(passwordInput, "Please create a password.");
+      else if (!rules.length) fail(passwordInput, "Password must be at least 8 characters.");
+      else if (!rules.number) fail(passwordInput, "Password must contain at least 1 number.");
+
+      if (!confirm) fail(confirmInput, "Please confirm your password.");
+      else if (confirm !== password) fail(confirmInput, "Passwords do not match.");
+
+      return valid ? { username, email, password } : null;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      showAlert(alertBox, "");
+
+      const data = validate();
+      if (!data) return;
+
+      registerBtn.disabled = true;
+      registerBtn.textContent = "Creating account...";
+      try {
+        const result = await registerUser(data);
+        if (result.ok) {
+          window.location.replace("index.html?registered=1");
+          return;
+        }
+        const input = result.field === "email" ? emailInput : usernameInput;
+        setFieldError(input, result.message);
+        showAlert(alertBox, result.message);
+      } catch (err) {
+        showAlert(alertBox, "Your browser can't run secure hashing here. Please open the page over https or localhost.");
+      }
+      registerBtn.disabled = false;
+      registerBtn.textContent = "Register";
+    });
+  </script>
+</body>
+</html>

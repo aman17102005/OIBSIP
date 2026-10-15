@@ -1,0 +1,341 @@
+/* ---------- Colours & fonts ---------- */
+:root {
+  --cream: #fbf6ee;        /* background 1 */
+  --navy: #10203a;         /* background 2 */
+  --saffron: #e8892b;      /* background 3 + accent */
+  --ink: #1f2430;
+  --soft-ink: #4a5161;
+  --line: #e6dccb;
+
+  --serif: "Playfair Display", Georgia, serif;   /* headings */
+  --sans: "Source Sans 3", "Segoe UI", sans-serif; /* body text */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.container {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1,
+h2 {
+  font-family: var(--serif);
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 28px;
+}
+
+a {
+  color: var(--saffron);
+}
+
+/* ---------- Navigation ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  background: rgba(251, 246, 238, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-logo {
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--saffron);
+  letter-spacing: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+  color: var(--saffron);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 70px 24px 80px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--saffron);
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+
+.tagline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  color: var(--soft-ink);
+  margin-bottom: 18px;
+}
+
+.dates {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: var(--soft-ink);
+}
+
+.hero-figure {
+  position: relative;
+}
+
+.hero-figure img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  margin: 0 auto;
+  border-radius: 20px;
+  box-shadow: 18px 18px 0 var(--saffron);
+  background: #e9dfcf;
+}
+
+.hero-figure figcaption {
+  max-width: 420px;
+  margin: 26px auto 0;
+  font-size: 0.9rem;
+  color: var(--soft-ink);
+  text-align: center;
+}
+
+.credit {
+  display: block;
+  font-size: 0.78rem;
+  opacity: 0.8;
+}
+
+/* Shown only if images/kalam.jpg is missing */
+.hero-figure.no-image img {
+  visibility: hidden;
+}
+
+.hero-figure.no-image::before {
+  content: "Add the photo as images/kalam.jpg";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 4 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  border: 2px dashed var(--saffron);
+  border-radius: 20px;
+  color: var(--soft-ink);
+}
+
+/* ---------- Biography (background 1: cream) ---------- */
+.bio {
+  padding: 80px 0;
+  border-top: 1px solid var(--line);
+}
+
+.bio p {
+  margin-bottom: 22px;
+  color: var(--soft-ink);
+}
+
+.bio p:first-of-type::first-letter {
+  font-family: var(--serif);
+  font-size: 3.6rem;
+  float: left;
+  line-height: 0.9;
+  padding: 6px 10px 0 0;
+  color: var(--saffron);
+}
+
+/* ---------- Timeline (background 2: navy) ---------- */
+.timeline-section {
+  background: var(--navy);
+  color: #eef1f7;
+  padding: 80px 0;
+}
+
+.timeline {
+  list-style: none;
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: rgba(232, 137, 43, 0.5);
+}
+
+.timeline-item {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 22px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--saffron);
+  border: 3px solid var(--navy);
+}
+
+.year {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--saffron);
+}
+
+.timeline-item p {
+  color: #c9d1e2;
+}
+
+/* ---------- Quote (background 3: saffron) ---------- */
+.quote-section {
+  background: var(--saffron);
+  padding: 90px 0;
+}
+
+.quote {
+  text-align: center;
+  color: #2a1606;
+}
+
+.quote p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  line-height: 1.35;
+  margin-bottom: 20px;
+}
+
+.quote cite {
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* ---------- Closing + footer ---------- */
+.closing {
+  padding: 60px 0;
+  text-align: center;
+  color: var(--soft-ink);
+}
+
+.footer {
+  background: var(--navy);
+  color: #9aa6bf;
+  text-align: center;
+  padding: 22px 20px;
+  font-size: 0.88rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 820px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 50px 20px 60px;
+    gap: 40px;
+  }
+
+  .hero-figure img {
+    max-width: 320px;
+    box-shadow: 12px 12px 0 var(--saffron);
+  }
+
+  .hero-figure.no-image::before {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    padding: 12px 16px;
+  }
+
+  .nav-links {
+    gap: 14px;
+  }
+
+  .bio,
+  .timeline-section {
+    padding: 60px 0;
+  }
+}

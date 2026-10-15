@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator | Aman Kapuria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="calculator" aria-label="Calculator">
+    <header class="calc-header">
+      <span class="brand">CALC</span>
+      <span class="hint">Keyboard works too</span>
+    </header>
+
+    <!-- Display screen: top line = expression, bottom line = current value / result -->
+    <section class="display" aria-live="polite">
+      <div class="expression" id="expression"></div>
+      <div class="result" id="result">0</div>
+    </section>
+
+    <!-- Buttons: no inline onclick. Every button is wired up in script.js with addEventListener -->
+    <section class="keys">
+      <button class="key fn" data-action="clear">C</button>
+      <button class="key fn" data-action="backspace" aria-label="Backspace">⌫</button>
+      <button class="key fn" data-action="percent">%</button>
+      <button class="key op" data-operator="÷">÷</button>
+
+      <button class="key" data-number="7">7</button>
+      <button class="key" data-number="8">8</button>
+      <button class="key" data-number="9">9</button>
+      <button class="key op" data-operator="×">×</button>
+
+      <button class="key" data-number="4">4</button>
+      <button class="key" data-number="5">5</button>
+      <button class="key" data-number="6">6</button>
+      <button class="key op" data-operator="−">−</button>
+
+      <button class="key" data-number="1">1</button>
+      <button class="key" data-number="2">2</button>
+      <button class="key" data-number="3">3</button>
+      <button class="key op" data-operator="+">+</button>
+
+      <button class="key zero" data-number="0">0</button>
+      <button class="key" data-action="decimal">.</button>
+      <button class="key equals" data-action="equals">=</button>
+    </section>
+  </main>
+
+  <footer class="credit">Built by Aman Kapuria · Oasis Infobyte Web Development Internship</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do App | Aman Kapuria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>My Tasks</h1>
+      <p class="today" id="today"></p>
+    </header>
+
+    <!-- Add a new task -->
+    <form class="add-form" id="addForm" autocomplete="off">
+      <input type="text" id="taskInput" placeholder="What do you need to do?" maxlength="120" aria-label="New task">
+      <button type="submit" class="btn-add">Add Task</button>
+    </form>
+    <p class="form-error" id="formError" role="alert"></p>
+
+    <div class="lists">
+      <!-- Pending tasks -->
+      <section class="list-card">
+        <div class="list-head">
+          <h2>Pending</h2>
+          <span class="count pending-count" id="pendingCount">0 pending</span>
+        </div>
+        <ul class="task-list" id="pendingList"></ul>
+        <p class="empty" id="pendingEmpty">🎉 Nothing pending. Add a task above to get started.</p>
+      </section>
+
+      <!-- Completed tasks -->
+      <section class="list-card">
+        <div class="list-head">
+          <h2>Completed</h2>
+          <span class="count done-count" id="completedCount">0 completed</span>
+        </div>
+        <ul class="task-list" id="completedList"></ul>
+        <p class="empty" id="completedEmpty">No completed tasks yet. Tick one off!</p>
+      </section>
+    </div>
+
+    <footer class="credit">Built by Aman Kapuria · Oasis Infobyte Web Development Internship · Tasks are saved in your browser</footer>
+  </main>
+
+  <!-- Template for one task row (copied by JavaScript) -->
+  <template id="taskTemplate">
+    <li class="task">
+      <button class="check" title="Mark complete" aria-label="Mark complete"></button>
+      <div class="task-body">
+        <span class="task-text"></span>
+        <input class="edit-input" type="text" maxlength="120" aria-label="Edit task">
+        <span class="task-time"></span>
+      </div>
+      <div class="task-actions">
+        <button class="icon-btn edit" title="Edit" aria-label="Edit task">✎</button>
+        <button class="icon-btn delete" title="Delete" aria-label="Delete task">🗑</button>
+      </div>
+    </li>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>

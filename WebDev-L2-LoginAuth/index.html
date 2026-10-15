@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | SecureAuth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="auth-wrap">
+    <aside class="brand-panel">
+      <div class="logo">🔒 SecureAuth</div>
+      <h2>Welcome back.</h2>
+      <p>Log in to reach your private dashboard. Your password is hashed with SHA-256 and never stored as plain text.</p>
+    </aside>
+
+    <main class="form-panel">
+      <h1>Log in</h1>
+      <p class="sub">Don't have an account? <a href="register.html">Create one</a></p>
+
+      <div class="alert" id="alert" role="alert" hidden></div>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="identifier">Username or email</label>
+          <input type="text" id="identifier" autocomplete="username" placeholder="e.g. aman or aman@mail.com">
+          <span class="field-error"></span>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="pass-wrap">
+            <input type="password" id="password" autocomplete="current-password" placeholder="Your password">
+            <button type="button" class="toggle-pass">Show</button>
+          </div>
+          <span class="field-error"></span>
+        </div>
+
+        <button type="submit" class="btn-primary" id="loginBtn">Log in</button>
+      </form>
+    </main>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    // Already logged in? Go straight to the dashboard.
+    if (getSession()) window.location.replace("dashboard.html");
+
+    const loginForm = document.getElementById("loginForm");
+    const identifierInput = document.getElementById("identifier");
+    const passwordInput = document.getElementById("password");
+    const alertBox = document.getElementById("alert");
+    const loginBtn = document.getElementById("loginBtn");
+
+    // Show the success message after registering
+    if (new URLSearchParams(location.search).get("registered") === "1") {
+      showAlert(alertBox, "Account created! Please log in.", "success");
+    }
+
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      showAlert(alertBox, "");
+
+      const identifier = identifierInput.value.trim();
+      const password = passwordInput.value;
+
+      // No empty submissions
+      setFieldError(identifierInput, identifier ? "" : "Please enter your username or email.");
+      setFieldError(passwordInput, password ? "" : "Please enter your password.");
+      if (!identifier || !password) return;
+
+      loginBtn.disabled = true;
+      loginBtn.textContent = "Checking...";
+      try {
+        const result = await loginUser(identifier, password);
+        if (result.ok) {
+          window.location.replace("dashboard.html");
+          return;
+        }
+        showAlert(alertBox, result.message);
+        passwordInput.value = "";
+        passwordInput.focus();
+      } catch (err) {
+        showAlert(alertBox, "Your browser can't run secure hashing here. Please open the page over https or localhost.");
+      }
+      loginBtn.disabled = false;
+      loginBtn.textContent = "Log in";
+    });
+
+    [identifierInput, passwordInput].forEach((input) =>
+      input.addEventListener("input", () => setFieldError(input, ""))
+    );
+  </script>
+</body>
+</html>
